@@ -39,7 +39,7 @@ express.response.renderStatic = function(cacheKey, view, options, fn) {
 		self.send(str);
 	};
 
-	if (view in app.cachedViews) {
+	if (cacheKey in app.cachedViews) {
 		fn(null, app.cachedViews[cacheKey]);
 	} else {
 		this.render(view, options, function(err, str) {
