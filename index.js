@@ -23,7 +23,7 @@ var express = require('express');
  * @param  {Function} fn
  */
 
-express.response.renderStatic = function(view, options, fn) {
+express.response.renderStatic = function(cacheKey, view, options, fn) {
 	var self = this, req = this.req, app = req.app;
 
 	if ('undefined' == typeof app.cachedViews) {
@@ -40,10 +40,10 @@ express.response.renderStatic = function(view, options, fn) {
 	};
 
 	if (view in app.cachedViews) {
-		fn(null, app.cachedViews[view]);
+		fn(null, app.cachedViews[cacheKey]);
 	} else {
 		this.render(view, options, function(err, str) {
-			app.cachedViews[view] = str;
+			app.cachedViews[cacheKey] = str;
 			if (err) return req.next(err);
 			self.send(str);
 		});
