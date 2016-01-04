@@ -17,7 +17,7 @@ npm:
   	require('express-static-render');
 
     app.get('/', function(req, res) {
-        res.renderStatic('index', { title: 'My Awesome Website' });
+        res.renderStatic(cacheKey, 'index', { title: 'My Awesome Website' });
     });
 
 [res-render-docs]: http://expressjs.com/guide.html#res.render()
